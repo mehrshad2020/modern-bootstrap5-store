@@ -50,28 +50,7 @@
 - **Bootstrap Icons** برای آیکون‌ها
 - **JavaScript** برای تعاملات کاربری
 
-## نحوه راه‌اندازی
-
-1. دانلود یا کلون پروژه
-   ```
-   git clone https://github.com/your-username/nextgen-shop.git
-   ```
-
-2. باز کردن پوشه پروژه
-   ```
-   cd nextgen-shop
-   ```
-
-3. اجرای پروژه با یک سرور محلی
-   برای مثال با استفاده از پلاگین Live Server در VSCode یا
-   ```
-   npx serve
-   ```
-
-4. مشاهده پروژه در مرورگر
-   ```
-   http://localhost:3000
-   ```
+   
 
 ## ساختار فایل‌ها
 
