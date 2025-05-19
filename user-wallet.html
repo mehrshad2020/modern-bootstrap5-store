@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه آنلاین نکستژن - کیف پول</title>
+    <!-- Bootstrap 5 RTL CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Vazir Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* هدر و منو */
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .nav-item .nav-link {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+        
+        .nav-item .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #000;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        
+        .nav-item .nav-link:hover::after {
+            width: 80%;
+            left: 10%;
+        }
+        
+        /* پنل کاربری */
+        .user-panel {
+            min-height: calc(100vh - 320px);
+        }
+        
+        .user-sidebar {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+        
+        .user-info {
+            text-align: center;
+            padding: 0 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 20px;
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #6c757d;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+        
+        .user-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .user-menu-item {
+            padding: 0;
+        }
+        
+        .user-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #495057;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .user-menu-link:hover, .user-menu-link.active {
+            background-color: #f8f9fa;
+            color: #000;
+        }
+        
+        .user-menu-icon {
+            margin-left: 10px;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .user-content {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            min-height: 500px;
+        }
+        
+        .content-title {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* کیف پول */
+        .wallet-balance {
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .wallet-balance-info h4 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        
+        .wallet-balance-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        
+        .wallet-balance-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .wallet-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .wallet-action-btn {
+            flex: 1;
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+        
+        .wallet-action-btn:hover {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+        
+        .wallet-action-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #0d6efd;
+        }
+        
+        .wallet-action-text {
+            font-weight: 500;
+        }
+        
+        .transaction-list {
+            margin-bottom: 30px;
+        }
+        
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+        
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-left: 15px;
+        }
+        
+        .transaction-icon.deposit {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        
+        .transaction-icon.payment {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+        
+        .transaction-icon.refund {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+        
+        .transaction-info {
+            flex: 1;
+        }
+        
+        .transaction-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .transaction-date {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        
+        .transaction-amount {
+            font-weight: 700;
+        }
+        
+        .transaction-amount.deposit {
+            color: #28a745;
+        }
+        
+        .transaction-amount.payment {
+            color: #dc3545;
+        }
+        
+        .transaction-amount.refund {
+            color: #ffc107;
+        }
+        
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .pagination-item {
+            margin: 0 5px;
+        }
+        
+        .pagination-link {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            color: #495057;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid #dee2e6;
+        }
+        
+        .pagination-link:hover, .pagination-link.active {
+            background-color: #0d6efd;
+            color: #fff;
+            border-color: #0d6efd;
+        }
+        
+        /* مودال افزایش اعتبار */
+        .modal-header {
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .modal-footer {
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .payment-methods {
+            margin-bottom: 20px;
+        }
+        
+        .payment-method-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method-item:hover {
+            border-color: #adb5bd;
+            background-color: #f8f9fa;
+        }
+        
+        .payment-method-item.active {
+            border-color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+        
+        .payment-method-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-size: 1.2rem;
+            color: #0d6efd;
+        }
+        
+        .payment-method-info {
+            flex: 1;
+        }
+        
+        .payment-method-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .payment-method-description {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        
+        .form-control {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        
+        .amount-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .amount-option {
+            flex: 1;
+            min-width: 100px;
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .amount-option:hover {
+            border-color: #adb5bd;
+            background-color: #f8f9fa;
+        }
+        
+        .amount-option.active {
+            border-color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.05);
+            color: #0d6efd;
+            font-weight: 500;
+        }
+        
+        .card-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.45rem;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 991.98px) {
+            .user-content {
+                margin-top: 20px;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .wallet-actions {
+                flex-direction: column;
+            }
+            
+            .wallet-action-btn {
+                flex-direction: row;
+                text-align: right;
+            }
+            
+            .wallet-action-icon {
+                margin-bottom: 0;
+                margin-left: 15px;
+            }
+        }
+        
+        /* فوتر */
+        footer {
+            background-color: #f8f9fa;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background-color: #212529;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white py-3 shadow-sm">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid p-0">
+                    <a class="navbar-brand" href="index.html">نکستژن</a>
+                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">خانه</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="products.html">محصولات</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about-us.html">درباره ما</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact-us.html">تماس با ما</a>
+                            </li>
+                        </ul>
+                        
+                        <div class="d-flex align-items-center">
+                            <a href="user-panel.html" class="btn btn-outline-dark me-2 active">
+                                <i class="bi bi-person"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-dark me-2">
+                                <i class="bi bi-heart"></i>
+                            </a>
+                            <a href="cart.html" class="btn btn-outline-dark position-relative">
+                                <i class="bi bi-cart3"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger card-badge">
+                                    3
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container my-5 user-panel">
+        <div class="row">
+            <!-- سایدبار کاربر -->
+            <div class="col-lg-3">
+                <div class="user-sidebar">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <h5 class="user-name">علی محمدی</h5>
+                        <p class="user-email">ali@example.com</p>
+                    </div>
+                    
+                    <ul class="user-menu">
+                        <li class="user-menu-item">
+                            <a href="user-panel.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-house"></i></span>
+                                داشبورد
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-orders.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-box-seam"></i></span>
+                                سفارش‌های من
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-heart"></i></span>
+                                لیست علاقه‌مندی‌ها
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-addresses.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-geo-alt"></i></span>
+                                آدرس‌های من
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-chat-dots"></i></span>
+                                نظرات من
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-wallet.html" class="user-menu-link active">
+                                <span class="user-menu-icon"><i class="bi bi-wallet2"></i></span>
+                                کیف پول
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-gift"></i></span>
+                                کدهای تخفیف
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-gear"></i></span>
+                                تنظیمات حساب کاربری
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="login-register.html" class="user-menu-link text-danger">
+                                <span class="user-menu-icon"><i class="bi bi-box-arrow-right"></i></span>
+                                خروج از حساب کاربری
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- محتوای اصلی -->
+            <div class="col-lg-9">
+                <div class="user-content">
+                    <div class="content-title">
+                        <h3 class="mb-0">کیف پول</h3>
+                        <span class="text-muted">مدیریت اعتبار و تراکنش‌ها</span>
+                    </div>
+                    
+                    <!-- موجودی کیف پول -->
+                    <div class="wallet-balance">
+                        <div class="wallet-balance-info">
+                            <h4>موجودی کیف پول</h4>
+                            <h3>150,000 تومان</h3>
+                        </div>
+                        <div class="wallet-balance-icon">
+                            <i class="bi bi-wallet2"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- عملیات کیف پول -->
+                    <div class="wallet-actions">
+                        <a href="#" class="wallet-action-btn" data-bs-toggle="modal" data-bs-target="#addCreditModal">
+                            <div class="wallet-action-icon">
+                                <i class="bi bi-plus-circle"></i>
+                            </div>
+                            <span class="wallet-action-text">افزایش موجودی</span>
+                        </a>
+                        
+                        <a href="#" class="wallet-action-btn">
+                            <div class="wallet-action-icon">
+                                <i class="bi bi-arrow-left-right"></i>
+                            </div>
+                            <span class="wallet-action-text">انتقال به دوستان</span>
+                        </a>
+                        
+                        <a href="#" class="wallet-action-btn">
+                            <div class="wallet-action-icon">
+                                <i class="bi bi-credit-card"></i>
+                            </div>
+                            <span class="wallet-action-text">درخواست برداشت</span>
+                        </a>
+                    </div>
+                    
+                    <!-- تاریخچه تراکنش‌ها -->
+                    <div class="transaction-list">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4>تاریخچه تراکنش‌ها</h4>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    فیلتر
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                                    <li><a class="dropdown-item active" href="#">همه تراکنش‌ها</a></li>
+                                    <li><a class="dropdown-item" href="#">واریز</a></li>
+                                    <li><a class="dropdown-item" href="#">برداشت</a></li>
+                                    <li><a class="dropdown-item" href="#">بازپرداخت</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- آیتم‌های تراکنش -->
+                        <div class="transaction-item">
+                            <div class="d-flex align-items-center">
+                                <div class="transaction-icon deposit">
+                                    <i class="bi bi-arrow-down"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">افزایش موجودی</div>
+                                    <div class="transaction-date">1402/08/25 - 14:35</div>
+                                </div>
+                            </div>
+                            <div class="transaction-amount deposit">+50,000 تومان</div>
+                        </div>
+                        
+                        <div class="transaction-item">
+                            <div class="d-flex align-items-center">
+                                <div class="transaction-icon payment">
+                                    <i class="bi bi-arrow-up"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">پرداخت سفارش #NXG-10057834</div>
+                                    <div class="transaction-date">1402/08/20 - 10:15</div>
+                                </div>
+                            </div>
+                            <div class="transaction-amount payment">-35,000 تومان</div>
+                        </div>
+                        
+                        <div class="transaction-item">
+                            <div class="d-flex align-items-center">
+                                <div class="transaction-icon refund">
+                                    <i class="bi bi-arrow-counterclockwise"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">بازپرداخت سفارش #NXG-10042518</div>
+                                    <div class="transaction-date">1402/07/10 - 18:45</div>
+                                </div>
+                            </div>
+                            <div class="transaction-amount refund">+25,000 تومان</div>
+                        </div>
+                        
+                        <div class="transaction-item">
+                            <div class="d-flex align-items-center">
+                                <div class="transaction-icon deposit">
+                                    <i class="bi bi-arrow-down"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">افزایش موجودی</div>
+                                    <div class="transaction-date">1402/07/01 - 09:20</div>
+                                </div>
+                            </div>
+                            <div class="transaction-amount deposit">+100,000 تومان</div>
+                        </div>
+                        
+                        <div class="transaction-item">
+                            <div class="d-flex align-items-center">
+                                <div class="transaction-icon payment">
+                                    <i class="bi bi-arrow-up"></i>
+                                </div>
+                                <div class="transaction-info">
+                                    <div class="transaction-title">پرداخت سفارش #NXG-10053729</div>
+                                    <div class="transaction-date">1402/06/15 - 16:30</div>
+                                </div>
+                            </div>
+                            <div class="transaction-amount payment">-45,000 تومان</div>
+                        </div>
+                    </div>
+                    
+                    <!-- پیجینیشن -->
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link active">1</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link">2</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link">3</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- مودال افزایش موجودی -->
+    <div class="modal fade" id="addCreditModal" tabindex="-1" aria-labelledby="addCreditModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCreditModalLabel">افزایش موجودی کیف پول</h5>
+                    <button type="button" class="btn-close ms-0 me-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-4">
+                            <label class="form-label">انتخاب مبلغ (تومان)</label>
+                            <div class="amount-options">
+                                <div class="amount-option">50,000</div>
+                                <div class="amount-option active">100,000</div>
+                                <div class="amount-option">200,000</div>
+                                <div class="amount-option">500,000</div>
+                            </div>
+                            <div class="input-group mt-3">
+                                <span class="input-group-text">تومان</span>
+                                <input type="text" class="form-control" placeholder="مبلغ دلخواه" value="100,000">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">انتخاب روش پرداخت</label>
+                            <div class="payment-methods">
+                                <div class="payment-method-item active">
+                                    <div class="payment-method-icon">
+                                        <i class="bi bi-credit-card"></i>
+                                    </div>
+                                    <div class="payment-method-info">
+                                        <div class="payment-method-title">درگاه مستقیم بانکی</div>
+                                        <div class="payment-method-description">پرداخت آنلاین با تمامی کارت‌های بانکی</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-method-item">
+                                    <div class="payment-method-icon">
+                                        <i class="bi bi-wallet2"></i>
+                                    </div>
+                                    <div class="payment-method-info">
+                                        <div class="payment-method-title">کیف پول دیجیتال</div>
+                                        <div class="payment-method-description">استفاده از کیف پول‌های دیجیتال مانند زرین‌پال</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-method-item">
+                                    <div class="payment-method-icon">
+                                        <i class="bi bi-bank"></i>
+                                    </div>
+                                    <div class="payment-method-info">
+                                        <div class="payment-method-title">کارت به کارت</div>
+                                        <div class="payment-method-description">واریز به شماره کارت و اعلام فیش واریزی</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="savePaymentMethod">
+                                <label class="form-check-label" for="savePaymentMethod">
+                                    ذخیره این روش پرداخت برای استفاده‌های بعدی
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                    <button type="button" class="btn btn-primary">پرداخت</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-3">درباره ما</h5>
+                    <p>فروشگاه نکستژن با ارائه جدیدترین محصولات پوشاک و اکسسوری، تجربه خرید آنلاین متفاوتی را برای شما فراهم می‌کند.</p>
+                    <div class="social-links mt-3">
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-telegram"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="mb-3">دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-decoration-none text-dark">صفحه اصلی</a></li>
+                        <li class="mb-2"><a href="products.html" class="text-decoration-none text-dark">محصولات</a></li>
+                        <li class="mb-2"><a href="about-us.html" class="text-decoration-none text-dark">درباره ما</a></li>
+                        <li class="mb-2"><a href="contact-us.html" class="text-decoration-none text-dark">تماس با ما</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5 class="mb-3">خدمات مشتریان</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">راهنمای خرید</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">شیوه‌های پرداخت</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">شیوه‌های ارسال</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">پیگیری سفارش</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3">
+                    <h5 class="mb-3">تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> تهران، خیابان ولیعصر</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i> 021-12345678</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> info@nextgen.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row mt-4 pt-4 border-top">
+                <div class="col-12 text-center">
+                    <p class="mb-0">© تمامی حقوق برای فروشگاه نکستژن محفوظ است. 1402</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

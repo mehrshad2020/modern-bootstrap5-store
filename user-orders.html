@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه آنلاین نکستژن - سفارش‌های من</title>
+    <!-- Bootstrap 5 RTL CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Vazir Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* هدر و منو */
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .nav-item .nav-link {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+        
+        .nav-item .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #000;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        
+        .nav-item .nav-link:hover::after {
+            width: 80%;
+            left: 10%;
+        }
+        
+        /* پنل کاربری */
+        .user-panel {
+            min-height: calc(100vh - 320px);
+        }
+        
+        .user-sidebar {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+        
+        .user-info {
+            text-align: center;
+            padding: 0 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 20px;
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #6c757d;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+        
+        .user-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .user-menu-item {
+            padding: 0;
+        }
+        
+        .user-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #495057;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .user-menu-link:hover, .user-menu-link.active {
+            background-color: #f8f9fa;
+            color: #000;
+        }
+        
+        .user-menu-icon {
+            margin-left: 10px;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .user-content {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            min-height: 500px;
+        }
+        
+        .content-title {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .order-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .status-completed {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        
+        .status-processing {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+        
+        .status-shipped {
+            background-color: rgba(13, 110, 253, 0.1);
+            color: #0d6efd;
+        }
+        
+        .status-canceled {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+        
+        .orders-filter {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .order-card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .order-header-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .order-header-id {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .order-header-date {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        
+        .order-body {
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .order-products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .order-product-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        
+        .order-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .order-price {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .order-tracking {
+            border-top: 1px solid #e9ecef;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.45rem;
+        }
+        
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .pagination-item {
+            margin: 0 5px;
+        }
+        
+        .pagination-link {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            color: #495057;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid #dee2e6;
+        }
+        
+        .pagination-link:hover, .pagination-link.active {
+            background-color: #0d6efd;
+            color: #fff;
+            border-color: #0d6efd;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 991.98px) {
+            .user-content {
+                margin-top: 20px;
+            }
+        }
+        
+        @media (max-width: 575.98px) {
+            .order-header, .order-summary {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .order-header-status, .order-actions {
+                margin-top: 10px;
+            }
+        }
+        
+        /* فوتر */
+        footer {
+            background-color: #f8f9fa;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background-color: #212529;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white py-3 shadow-sm">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid p-0">
+                    <a class="navbar-brand" href="index.html">نکستژن</a>
+                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">خانه</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="products.html">محصولات</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about-us.html">درباره ما</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact-us.html">تماس با ما</a>
+                            </li>
+                        </ul>
+                        
+                        <div class="d-flex align-items-center">
+                            <a href="user-panel.html" class="btn btn-outline-dark me-2 active">
+                                <i class="bi bi-person"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-dark me-2">
+                                <i class="bi bi-heart"></i>
+                            </a>
+                            <a href="cart.html" class="btn btn-outline-dark position-relative">
+                                <i class="bi bi-cart3"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">
+                                    3
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container my-5 user-panel">
+        <div class="row">
+            <!-- سایدبار کاربر -->
+            <div class="col-lg-3">
+                <div class="user-sidebar">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <h5 class="user-name">علی محمدی</h5>
+                        <p class="user-email">ali@example.com</p>
+                    </div>
+                    
+                    <ul class="user-menu">
+                        <li class="user-menu-item">
+                            <a href="user-panel.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-house"></i></span>
+                                داشبورد
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-orders.html" class="user-menu-link active">
+                                <span class="user-menu-icon"><i class="bi bi-box-seam"></i></span>
+                                سفارش‌های من
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-heart"></i></span>
+                                لیست علاقه‌مندی‌ها
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-geo-alt"></i></span>
+                                آدرس‌های من
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-chat-dots"></i></span>
+                                نظرات من
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-wallet2"></i></span>
+                                کیف پول
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-gift"></i></span>
+                                کدهای تخفیف
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-gear"></i></span>
+                                تنظیمات حساب کاربری
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="login-register.html" class="user-menu-link text-danger">
+                                <span class="user-menu-icon"><i class="bi bi-box-arrow-right"></i></span>
+                                خروج از حساب کاربری
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- محتوای اصلی -->
+            <div class="col-lg-9">
+                <div class="user-content">
+                    <div class="content-title">
+                        <h3 class="mb-0">سفارش‌های من</h3>
+                        <span class="text-muted">مدیریت و پیگیری سفارش‌ها</span>
+                    </div>
+                    
+                    <div class="orders-filter">
+                        <div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-secondary active">همه</button>
+                                <button type="button" class="btn btn-outline-secondary">در حال پردازش</button>
+                                <button type="button" class="btn btn-outline-secondary">ارسال شده</button>
+                                <button type="button" class="btn btn-outline-secondary">تحویل شده</button>
+                                <button type="button" class="btn btn-outline-secondary">لغو شده</button>
+                            </div>
+                        </div>
+                        <div>
+                            <select class="form-select">
+                                <option selected>مرتب‌سازی</option>
+                                <option>جدیدترین</option>
+                                <option>قدیمی‌ترین</option>
+                                <option>بیشترین مبلغ</option>
+                                <option>کمترین مبلغ</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- سفارش‌های کاربر -->
+                    <div class="orders-list">
+                        <!-- سفارش اول -->
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div class="order-header-info">
+                                    <div class="order-header-id">سفارش #NXG-10057834</div>
+                                    <div class="order-header-date">1402/08/29</div>
+                                </div>
+                                <div class="order-header-status">
+                                    <span class="order-status status-processing">در حال آماده‌سازی</span>
+                                </div>
+                            </div>
+                            <div class="order-body">
+                                <div class="order-products">
+                                    <img src="https://images.unsplash.com/photo-1578681994506-b8f463449011?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" alt="هودی" class="order-product-img">
+                                    <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" alt="کفش" class="order-product-img">
+                                    <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" alt="تیشرت" class="order-product-img">
+                                </div>
+                                <div class="d-flex">
+                                    <span class="badge bg-secondary me-2">هودی راحت سایز M</span>
+                                    <span class="badge bg-secondary me-2">کفش ورزشی سایز 42</span>
+                                    <span class="badge bg-secondary">تیشرت ساده سایز L</span>
+                                </div>
+                            </div>
+                            <div class="order-summary">
+                                <div class="order-price">92,000 تومان</div>
+                                <div class="order-actions">
+                                    <a href="payment-details.html" class="btn btn-outline-primary">نمایش جزئیات</a>
+                                </div>
+                            </div>
+                            <div class="order-tracking">
+                                <div>
+                                    <i class="bi bi-truck me-2"></i>
+                                    <span>روش ارسال: پست پیشتاز</span>
+                                </div>
+                                <div>
+                                    <i class="bi bi-calendar-event me-2"></i>
+                                    <span>تاریخ تحویل تقریبی: 1402/09/01 تا 1402/09/03</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- سفارش دوم -->
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div class="order-header-info">
+                                    <div class="order-header-id">سفارش #NXG-10053729</div>
+                                    <div class="order-header-date">1402/07/15</div>
+                                </div>
+                                <div class="order-header-status">
+                                    <span class="order-status status-shipped">ارسال شده</span>
+                                </div>
+                            </div>
+                            <div class="order-body">
+                                <div class="order-products">
+                                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" alt="شلوار" class="order-product-img">
+                                    <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" alt="ساعت" class="order-product-img">
+                                </div>
+                                <div class="d-flex">
+                                    <span class="badge bg-secondary me-2">شلوار جین زنانه</span>
+                                    <span class="badge bg-secondary">ساعت مچی کلاسیک</span>
+                                </div>
+                            </div>
+                            <div class="order-summary">
+                                <div class="order-price">145,000 تومان</div>
+                                <div class="order-actions">
+                                    <a href="#" class="btn btn-outline-primary">نمایش جزئیات</a>
+                                </div>
+                            </div>
+                            <div class="order-tracking">
+                                <div>
+                                    <i class="bi bi-truck me-2"></i>
+                                    <span>روش ارسال: پست پیشتاز</span>
+                                </div>
+                                <div>
+                                    <i class="bi bi-geo-alt me-2"></i>
+                                    <span>کد رهگیری: 123456789012</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- سفارش سوم -->
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div class="order-header-info">
+                                    <div class="order-header-id">سفارش #NXG-10049257</div>
+                                    <div class="order-header-date">1402/06/02</div>
+                                </div>
+                                <div class="order-header-status">
+                                    <span class="order-status status-completed">تحویل شده</span>
+                                </div>
+                            </div>
+                            <div class="order-body">
+                                <div class="order-products">
+                                    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" alt="کت" class="order-product-img">
+                                </div>
+                                <div class="d-flex">
+                                    <span class="badge bg-secondary">کت اسپرت مردانه</span>
+                                </div>
+                            </div>
+                            <div class="order-summary">
+                                <div class="order-price">78,500 تومان</div>
+                                <div class="order-actions">
+                                    <a href="#" class="btn btn-outline-primary">نمایش جزئیات</a>
+                                    <button class="btn btn-outline-success ms-2">ثبت نظر</button>
+                                    <button class="btn btn-outline-warning ms-2">درخواست مرجوعی</button>
+                                </div>
+                            </div>
+                            <div class="order-tracking">
+                                <div>
+                                    <i class="bi bi-truck me-2"></i>
+                                    <span>روش ارسال: پست پیشتاز</span>
+                                </div>
+                                <div>
+                                    <i class="bi bi-check-circle-fill me-2 text-success"></i>
+                                    <span>تحویل داده شده در تاریخ 1402/06/05</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- سفارش چهارم -->
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div class="order-header-info">
+                                    <div class="order-header-id">سفارش #NXG-10042518</div>
+                                    <div class="order-header-date">1402/04/18</div>
+                                </div>
+                                <div class="order-header-status">
+                                    <span class="order-status status-canceled">لغو شده</span>
+                                </div>
+                            </div>
+                            <div class="order-body">
+                                <div class="order-products">
+                                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" alt="کفش" class="order-product-img">
+                                </div>
+                                <div class="d-flex">
+                                    <span class="badge bg-secondary">کفش ورزشی نایک</span>
+                                </div>
+                            </div>
+                            <div class="order-summary">
+                                <div class="order-price">52,000 تومان</div>
+                                <div class="order-actions">
+                                    <a href="#" class="btn btn-outline-primary">نمایش جزئیات</a>
+                                    <button class="btn btn-outline-primary ms-2">سفارش مجدد</button>
+                                </div>
+                            </div>
+                            <div class="order-tracking">
+                                <div>
+                                    <i class="bi bi-x-circle-fill me-2 text-danger"></i>
+                                    <span>لغو شده توسط کاربر</span>
+                                </div>
+                                <div>
+                                    <i class="bi bi-calendar-event me-2"></i>
+                                    <span>تاریخ لغو: 1402/04/19</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- پیجینیشن -->
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link active">1</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link">2</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link">3</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="#" class="pagination-link">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-3">درباره ما</h5>
+                    <p>فروشگاه نکستژن با ارائه جدیدترین محصولات پوشاک و اکسسوری، تجربه خرید آنلاین متفاوتی را برای شما فراهم می‌کند.</p>
+                    <div class="social-links mt-3">
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-telegram"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="mb-3">دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-decoration-none text-dark">صفحه اصلی</a></li>
+                        <li class="mb-2"><a href="products.html" class="text-decoration-none text-dark">محصولات</a></li>
+                        <li class="mb-2"><a href="about-us.html" class="text-decoration-none text-dark">درباره ما</a></li>
+                        <li class="mb-2"><a href="contact-us.html" class="text-decoration-none text-dark">تماس با ما</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5 class="mb-3">خدمات مشتریان</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">راهنمای خرید</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">شیوه‌های پرداخت</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">شیوه‌های ارسال</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">پیگیری سفارش</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3">
+                    <h5 class="mb-3">تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> تهران، خیابان ولیعصر</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i> 021-12345678</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> info@nextgen.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row mt-4 pt-4 border-top">
+                <div class="col-12 text-center">
+                    <p class="mb-0">© تمامی حقوق برای فروشگاه نکستژن محفوظ است. 1402</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

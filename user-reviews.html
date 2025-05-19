@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه آنلاین نکستژن - نظرات من</title>
+    <!-- Bootstrap 5 RTL CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Vazir Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* هدر و منو */
+        .navbar-brand {font-weight: bold; font-size: 1.5rem;}
+        .nav-item .nav-link {font-size: 1rem; padding: 0.5rem 1rem; position: relative;}
+        .nav-item .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: 0; left: 50%; background-color: #000;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        .nav-item .nav-link:hover::after {width: 80%; left: 10%;}
+        
+        /* پنل کاربری */
+        .user-panel {min-height: calc(100vh - 320px);}
+        .user-sidebar {
+            background-color: #fff; border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05); padding: 20px 0;
+            margin-bottom: 20px;
+        }
+        .user-info {
+            text-align: center; padding: 0 15px 20px;
+            border-bottom: 1px solid #e9ecef; margin-bottom: 20px;
+        }
+        .user-avatar {
+            width: 80px; height: 80px; border-radius: 50%;
+            margin: 0 auto 10px; background-color: #e9ecef;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: #6c757d;
+        }
+        .user-name {font-weight: 600; margin-bottom: 5px;}
+        .user-email {font-size: 0.85rem; color: #6c757d; margin-bottom: 0;}
+        .user-menu {list-style: none; padding: 0; margin: 0;}
+        .user-menu-item {padding: 0;}
+        .user-menu-link {
+            display: flex; align-items: center; padding: 12px 20px;
+            color: #495057; text-decoration: none; transition: all 0.3s ease;
+        }
+        .user-menu-link:hover, .user-menu-link.active {
+            background-color: #f8f9fa; color: #000;
+        }
+        .user-menu-icon {
+            margin-left: 10px; font-size: 1.2rem;
+            width: 24px; text-align: center;
+        }
+        .user-content {
+            background-color: #fff; border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05); padding: 25px;
+            min-height: 500px;
+        }
+        .content-title {
+            margin-bottom: 25px; padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        
+        /* نظرات کاربر */
+        .review-item {
+            margin-bottom: 25px;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .review-product {
+            display: flex;
+            align-items: center;
+        }
+        .review-product-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-left: 15px;
+        }
+        .review-product-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .review-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .review-status {
+            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 15px;
+        }
+        .status-published {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        .status-pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+        .status-rejected {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+        .review-body {
+            padding: 15px;
+        }
+        .review-rating {
+            margin-bottom: 10px;
+        }
+        .review-rating i {
+            color: #ffc107;
+            margin-left: 2px;
+        }
+        .review-text {
+            margin-bottom: 15px;
+        }
+        .review-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* پاصفحه */
+        .footer {
+            margin-top: 60px;
+            padding: 60px 0 30px;
+            background-color: #212529;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار بالایی -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">نکستژن</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">محصولات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about-us.html">درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact-us.html">تماس با ما</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="user-panel.html" class="btn btn-outline-dark ms-2">
+                        <i class="bi bi-person"></i>
+                    </a>
+                    <a href="cart.html" class="btn btn-outline-dark position-relative">
+                        <i class="bi bi-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            2
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- فضای خالی برای فاصله از نوار بالایی -->
+    <div style="padding-top: 76px;"></div>
+    
+    <!-- محتوای اصلی -->
+    <div class="container my-5">
+        <div class="row user-panel g-4">
+            <!-- سایدبار -->
+            <div class="col-lg-3">
+                <div class="user-sidebar">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <h5 class="user-name">علی محمدی</h5>
+                        <p class="user-email">ali@example.com</p>
+                    </div>
+                    
+                    <ul class="user-menu">
+                        <li class="user-menu-item">
+                            <a href="user-panel.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-house"></i></span>
+                                داشبورد
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-orders.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-box-seam"></i></span>
+                                سفارش‌های من
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-wishlist.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-heart"></i></span>
+                                لیست علاقه‌مندی‌ها
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-addresses.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-geo-alt"></i></span>
+                                آدرس‌های من
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-reviews.html" class="user-menu-link active">
+                                <span class="user-menu-icon"><i class="bi bi-chat-dots"></i></span>
+                                نظرات من
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-wallet.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-wallet2"></i></span>
+                                کیف پول
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="#" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-gift"></i></span>
+                                کدهای تخفیف
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="user-settings.html" class="user-menu-link">
+                                <span class="user-menu-icon"><i class="bi bi-gear"></i></span>
+                                تنظیمات حساب کاربری
+                            </a>
+                        </li>
+                        <li class="user-menu-item">
+                            <a href="login-register.html" class="user-menu-link text-danger">
+                                <span class="user-menu-icon"><i class="bi bi-box-arrow-right"></i></span>
+                                خروج از حساب کاربری
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- محتوای اصلی -->
+            <div class="col-lg-9">
+                <div class="user-content">
+                    <div class="content-title">
+                        <h3 class="mb-0">نظرات من</h3>
+                        <span>4 نظر</span>
+                    </div>
+                    
+                    <!-- جستجو و فیلتر -->
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <div class="flex-grow-1">
+                            <input type="text" class="form-control" placeholder="جستجو در نظرات...">
+                        </div>
+                        <select class="form-select" style="width: auto;">
+                            <option selected>همه نظرات</option>
+                            <option>منتشر شده</option>
+                            <option>در انتظار تایید</option>
+                            <option>رد شده</option>
+                        </select>
+                    </div>
+                    
+                    <!-- لیست نظرات -->
+                    <div class="reviews-list">
+                        <!-- نظر ۱ -->
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="review-product">
+                                    <img src="https://via.placeholder.com/60x60" alt="محصول" class="review-product-img">
+                                    <div>
+                                        <h6 class="review-product-title">پیراهن مردانه طرح چهارخانه آستین بلند</h6>
+                                        <div class="review-date">تاریخ ثبت: 1402/08/25</div>
+                                    </div>
+                                </div>
+                                <span class="review-status status-published">منتشر شده</span>
+                            </div>
+                            <div class="review-body">
+                                <div class="review-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                                <p class="review-text">
+                                    کیفیت پارچه خیلی خوب بود و دوخت تمیزی داشت. سایز کاملا استاندارد بود و فیت تن من شد. رنگ هم دقیقا مثل تصویر بود. از خرید خودم راضی هستم و پیشنهاد می‌کنم.
+                                </p>
+                                <div class="review-actions">
+                                    <a href="product-details.html" class="btn btn-sm btn-outline-dark">مشاهده محصول</a>
+                                    <button class="btn btn-sm btn-outline-secondary">ویرایش نظر</button>
+                                    <button class="btn btn-sm btn-outline-danger">حذف</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- نظر ۲ -->
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="review-product">
+                                    <img src="https://via.placeholder.com/60x60" alt="محصول" class="review-product-img">
+                                    <div>
+                                        <h6 class="review-product-title">کفش ورزشی مردانه نایکی مدل Air Max</h6>
+                                        <div class="review-date">تاریخ ثبت: 1402/07/12</div>
+                                    </div>
+                                </div>
+                                <span class="review-status status-pending">در انتظار تایید</span>
+                            </div>
+                            <div class="review-body">
+                                <div class="review-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="review-text">
+                                    کفش بسیار باکیفیتی هست. راحت و سبک هست و برای پیاده‌روی و دویدن عالیه. رنگبندی جذابی داره و طراحی زیبایی داره. به نظرم ارزش خرید داره.
+                                </p>
+                                <div class="review-actions">
+                                    <a href="product-details.html" class="btn btn-sm btn-outline-dark">مشاهده محصول</a>
+                                    <button class="btn btn-sm btn-outline-secondary">ویرایش نظر</button>
+                                    <button class="btn btn-sm btn-outline-danger">حذف</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- نظر ۳ -->
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="review-product">
+                                    <img src="https://via.placeholder.com/60x60" alt="محصول" class="review-product-img">
+                                    <div>
+                                        <h6 class="review-product-title">تیشرت مردانه یقه گرد طرح ساده</h6>
+                                        <div class="review-date">تاریخ ثبت: 1402/05/18</div>
+                                    </div>
+                                </div>
+                                <span class="review-status status-published">منتشر شده</span>
+                            </div>
+                            <div class="review-body">
+                                <div class="review-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                                <p class="review-text">
+                                    کیفیت نسبتا خوبی داره. بعد از چندبار شستن کمی تغییر رنگ داد اما بافت و دوخت خوبی داشت. قیمت مناسبی هم داشت.
+                                </p>
+                                <div class="review-actions">
+                                    <a href="product-details.html" class="btn btn-sm btn-outline-dark">مشاهده محصول</a>
+                                    <button class="btn btn-sm btn-outline-secondary">ویرایش نظر</button>
+                                    <button class="btn btn-sm btn-outline-danger">حذف</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- نظر ۴ -->
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="review-product">
+                                    <img src="https://via.placeholder.com/60x60" alt="محصول" class="review-product-img">
+                                    <div>
+                                        <h6 class="review-product-title">شلوار جین زنانه مدل مام استایل</h6>
+                                        <div class="review-date">تاریخ ثبت: 1402/04/07</div>
+                                    </div>
+                                </div>
+                                <span class="review-status status-rejected">رد شده</span>
+                            </div>
+                            <div class="review-body">
+                                <div class="review-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                                <p class="review-text">
+                                    کیفیت اصلا خوب نبود. سایز اشتباه بود و کیفیت دوخت بسیار پایین بود. اصلا پیشنهاد نمی‌کنم.
+                                </p>
+                                <p class="text-danger small">دلیل رد: عدم رعایت قوانین انتشار نظرات</p>
+                                <div class="review-actions">
+                                    <a href="product-details.html" class="btn btn-sm btn-outline-dark">مشاهده محصول</a>
+                                    <button class="btn btn-sm btn-outline-secondary">ویرایش نظر</button>
+                                    <button class="btn btn-sm btn-outline-danger">حذف</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- صفحه‌بندی -->
+                    <nav class="d-flex justify-content-center mt-5">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">بعدی</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- فوتر -->
+    <footer class="footer text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-3">دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">صفحه اصلی</a></li>
+                        <li class="mb-2"><a href="products.html" class="text-white text-decoration-none">محصولات</a></li>
+                        <li class="mb-2"><a href="about-us.html" class="text-white text-decoration-none">درباره ما</a></li>
+                        <li class="mb-2"><a href="contact-us.html" class="text-white text-decoration-none">تماس با ما</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-3">خدمات مشتریان</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">راهنمای خرید</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">شیوه‌های پرداخت</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">شیوه‌های ارسال</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">پیگیری سفارش</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-3">ارتباط با ما</h5>
+                    <p class="mb-2">تهران، خیابان ولیعصر، پلاک ۱۲۳</p>
+                    <p class="mb-2">تلفن: ۸۸۷۷۶۶۵۵-۰۲۱</p>
+                    <p class="mb-2">ایمیل: info@nextgen.ir</p>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white me-2"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-telegram"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-3">خبرنامه</h5>
+                    <p>برای اطلاع از آخرین محصولات و تخفیف‌ها در خبرنامه ما عضو شوید.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="ایمیل خود را وارد کنید...">
+                        <button class="btn btn-light" type="button">عضویت</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <p class="mb-3 mb-md-0">© ۱۴۰۲ - تمامی حقوق برای فروشگاه آنلاین نکستژن محفوظ است.</p>
+                <div class="payment-methods">
+                    <i class="bi bi-credit-card mx-1"></i>
+                    <i class="bi bi-wallet2 mx-1"></i>
+                    <i class="bi bi-bank mx-1"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- اسکریپت‌های Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

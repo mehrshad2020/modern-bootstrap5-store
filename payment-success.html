@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه آنلاین نکستژن - پرداخت موفق</title>
+    <!-- Bootstrap 5 RTL CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Vazir Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+        }
+        
+        /* هدر و منو */
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .nav-item .nav-link {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+        
+        .nav-item .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #000;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        
+        .nav-item .nav-link:hover::after {
+            width: 80%;
+            left: 10%;
+        }
+        
+        /* پرداخت موفق */
+        .payment-result {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            background-color: rgba(40, 167, 69, 0.1);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .order-details {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-total {
+            font-weight: bold;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.03);
+        }
+        
+        .progress-track {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .progress-track::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 12%;
+            right: 12%;
+            height: 3px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .progress-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 3px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 20px;
+            color: #6c757d;
+        }
+        
+        .progress-step.completed .progress-icon {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        
+        .progress-step.active .progress-icon {
+            border-color: #28a745;
+            color: #28a745;
+        }
+        
+        .progress-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .progress-step.completed .progress-label,
+        .progress-step.active .progress-label {
+            color: #212529;
+            font-weight: 600;
+        }
+        
+        .tracking-number {
+            background-color: #e9ecef;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-family: monospace;
+            letter-spacing: 1px;
+            margin: 0 5px;
+        }
+        
+        .suggestion-product {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .suggestion-product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .suggestion-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .btn-outline-success {
+            border-width: 2px;
+        }
+        
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        /* کارت */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-weight: 600;
+        }
+        
+        /* فوتر */
+        footer {
+            background-color: #f8f9fa;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background-color: #212529;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #6c757d;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.45rem;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 767.98px) {
+            .progress-track::before {
+                left: 8%;
+                right: 8%;
+            }
+            
+            .progress-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .progress-label {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white py-3 shadow-sm">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid p-0">
+                    <a class="navbar-brand" href="index.html">نکستژن</a>
+                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">خانه</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="products.html">محصولات</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about-us.html">درباره ما</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact-us.html">تماس با ما</a>
+                            </li>
+                        </ul>
+                        
+                        <div class="d-flex align-items-center">
+                            <a href="login-register.html" class="btn btn-outline-dark me-2">
+                                <i class="bi bi-person"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-dark me-2">
+                                <i class="bi bi-heart"></i>
+                            </a>
+                            <a href="cart.html" class="btn btn-outline-dark position-relative">
+                                <i class="bi bi-cart3"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">
+                                    3
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="payment-result">
+                    <div class="success-icon">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                    <h2 class="mb-3">پرداخت با موفقیت انجام شد</h2>
+                    <p class="mb-4">از خرید شما سپاسگزاریم. سفارش شما با موفقیت ثبت شد و در اسرع وقت برای شما ارسال خواهد شد.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <div class="card h-100">
+                                <div class="card-header">اطلاعات سفارش</div>
+                                <div class="card-body">
+                                    <div class="order-item">
+                                        <div>شماره سفارش:</div>
+                                        <div>NXG-10057834</div>
+                                    </div>
+                                    <div class="order-item">
+                                        <div>تاریخ سفارش:</div>
+                                        <div>1402/08/29</div>
+                                    </div>
+                                    <div class="order-item">
+                                        <div>روش پرداخت:</div>
+                                        <div>پرداخت آنلاین</div>
+                                    </div>
+                                    <div class="order-item">
+                                        <div>شماره پیگیری بانکی:</div>
+                                        <div>246813579</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">اطلاعات ارسال</div>
+                                <div class="card-body">
+                                    <div class="order-item">
+                                        <div>نام تحویل گیرنده:</div>
+                                        <div>علی محمدی</div>
+                                    </div>
+                                    <div class="order-item">
+                                        <div>آدرس:</div>
+                                        <div>تهران، خیابان جمهوری، پلاک 158</div>
+                                    </div>
+                                    <div class="order-item">
+                                        <div>کدپستی:</div>
+                                        <div>1234567890</div>
+                                    </div>
+                                    <div class="order-item">
+                                        <div>شماره تماس:</div>
+                                        <div>09123456789</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-details mt-4">
+                        <h4 class="mb-3">جزئیات سفارش</h4>
+                        <div class="order-item">
+                            <div>هودی راحت (سایز M، رنگ مشکی)</div>
+                            <div>24,000 تومان</div>
+                        </div>
+                        <div class="order-item">
+                            <div>کفش ورزشی (سایز 42، رنگ سفید)</div>
+                            <div>35,000 تومان</div>
+                        </div>
+                        <div class="order-item">
+                            <div>تیشرت ساده (سایز L، رنگ آبی)</div>
+                            <div>18,000 تومان</div>
+                        </div>
+                        <div class="order-item">
+                            <div>هزینه ارسال</div>
+                            <div>15,000 تومان</div>
+                        </div>
+                        <div class="order-item">
+                            <div>تخفیف</div>
+                            <div>0 تومان</div>
+                        </div>
+                        <div class="order-total d-flex justify-content-between">
+                            <div>مجموع</div>
+                            <div>92,000 تومان</div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-5 mb-4">مراحل سفارش شما</h4>
+                    <div class="progress-track">
+                        <div class="progress-step completed">
+                            <div class="progress-icon">
+                                <i class="bi bi-check-lg"></i>
+                            </div>
+                            <div class="progress-label">ثبت سفارش</div>
+                        </div>
+                        <div class="progress-step completed">
+                            <div class="progress-icon">
+                                <i class="bi bi-check-lg"></i>
+                            </div>
+                            <div class="progress-label">پرداخت</div>
+                        </div>
+                        <div class="progress-step active">
+                            <div class="progress-icon">
+                                <i class="bi bi-box-seam"></i>
+                            </div>
+                            <div class="progress-label">آماده‌سازی</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="progress-icon">
+                                <i class="bi bi-truck"></i>
+                            </div>
+                            <div class="progress-label">ارسال</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="progress-icon">
+                                <i class="bi bi-house-check"></i>
+                            </div>
+                            <div class="progress-label">تحویل</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <p class="mb-3">ایمیلی حاوی اطلاعات سفارش به آدرس <strong>user@example.com</strong> ارسال شد.</p>
+                        <p>می‌توانید با کد رهگیری <span class="tracking-number">NXG-10057834</span> از وضعیت سفارش خود مطلع شوید.</p>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="index.html" class="btn btn-outline-dark me-2">بازگشت به صفحه اصلی</a>
+                        <a href="products.html" class="btn btn-outline-success">ادامه خرید</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- محصولات پیشنهادی -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="mb-4">شاید این محصولات را هم دوست داشته باشید</h3>
+            </div>
+            
+            <div class="col-6 col-md-3 mb-4">
+                <div class="suggestion-product">
+                    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="محصول پیشنهادی" class="suggestion-img">
+                    <div class="p-3">
+                        <div class="mb-2">کت مردانه</div>
+                        <h6 class="mb-2">کت اسپرت مدرن</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>45,000 تومان</div>
+                            <button class="btn btn-sm btn-outline-dark"><i class="bi bi-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-3 mb-4">
+                <div class="suggestion-product">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="محصول پیشنهادی" class="suggestion-img">
+                    <div class="p-3">
+                        <div class="mb-2">شلوار زنانه</div>
+                        <h6 class="mb-2">شلوار جین</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>32,000 تومان</div>
+                            <button class="btn btn-sm btn-outline-dark"><i class="bi bi-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-3 mb-4">
+                <div class="suggestion-product">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="محصول پیشنهادی" class="suggestion-img">
+                    <div class="p-3">
+                        <div class="mb-2">کفش مردانه</div>
+                        <h6 class="mb-2">کفش ورزشی نایک</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>56,000 تومان</div>
+                            <button class="btn btn-sm btn-outline-dark"><i class="bi bi-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-3 mb-4">
+                <div class="suggestion-product">
+                    <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="محصول پیشنهادی" class="suggestion-img">
+                    <div class="p-3">
+                        <div class="mb-2">ساعت مچی</div>
+                        <h6 class="mb-2">ساعت کلاسیک</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>75,000 تومان</div>
+                            <button class="btn btn-sm btn-outline-dark"><i class="bi bi-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-3">درباره ما</h5>
+                    <p>فروشگاه نکستژن با ارائه جدیدترین محصولات پوشاک و اکسسوری، تجربه خرید آنلاین متفاوتی را برای شما فراهم می‌کند.</p>
+                    <div class="social-links mt-3">
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-telegram"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="mb-3">دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-decoration-none text-dark">صفحه اصلی</a></li>
+                        <li class="mb-2"><a href="products.html" class="text-decoration-none text-dark">محصولات</a></li>
+                        <li class="mb-2"><a href="about-us.html" class="text-decoration-none text-dark">درباره ما</a></li>
+                        <li class="mb-2"><a href="contact-us.html" class="text-decoration-none text-dark">تماس با ما</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5 class="mb-3">خدمات مشتریان</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">راهنمای خرید</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">شیوه‌های پرداخت</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">شیوه‌های ارسال</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">پیگیری سفارش</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3">
+                    <h5 class="mb-3">تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> تهران، خیابان ولیعصر</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i> 021-12345678</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> info@nextgen.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row mt-4 pt-4 border-top">
+                <div class="col-12 text-center">
+                    <p class="mb-0">© تمامی حقوق برای فروشگاه نکستژن محفوظ است. 1402</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
