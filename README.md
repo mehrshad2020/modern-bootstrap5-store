@@ -1,8 +1,9 @@
 # نکستژن - فروشگاه آنلاین پوشاک
+![Screenshot 2025-05-19 122520](https://github.com/user-attachments/assets/6682c30f-3738-426a-acbf-611fda083d30)
+![Screenshot 2025-05-19 122420](https://github.com/user-attachments/assets/5e94647f-7cb6-4f74-9b25-01fe7b327875)
+![Screenshot 2025-05-19 122452](https://github.com/user-attachments/assets/bc36f85c-e180-4fa8-b115-0afa74f4b5db)
 
-<p align="center">
-  <img src="https://via.placeholder.com/200x200" alt="لوگوی نکستژن" width="200"/>
-</p>
+
 
 <div dir="rtl">
 
